@@ -1,31 +1,13 @@
+import 'package:desafiocubos/app_module.dart';
+import 'package:desafiocubos/app_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:http_get_cache/http_get_cache.dart';
 
-void main() {
-  runApp(const EmptyApp());
-}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-class EmptyApp extends StatelessWidget {
-  const EmptyApp({Key? key}) : super(key: key);
+  await GetCache.initialize();
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Desafio Cubos',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const EmptyPage(),
-    );
-  }
-}
-
-class EmptyPage extends StatelessWidget {
-  const EmptyPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Empty Page'),
-    );
-  }
+  return runApp(ModularApp(module: AppModule(), child: const AppWidget()));
 }
