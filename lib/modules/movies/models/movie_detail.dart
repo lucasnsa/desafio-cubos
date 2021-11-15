@@ -1,6 +1,5 @@
 import 'package:desafiocubos/modules/movies/models/genre_item.dart';
 
-
 /// Classe modelo de **detalhes do titulo**.
 class MovieDetail {
   final int id;

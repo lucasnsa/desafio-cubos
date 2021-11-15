@@ -108,6 +108,7 @@ class _MoviesHomePageState extends State<MoviesHomePage>
               builderDelegate: PagedChildBuilderDelegate<MovieItem>(
                 itemBuilder: (context, item, index) => MovieTile(
                   movie: item,
+                  onTap: () => Modular.to.pushNamed('/detail', arguments: item),
                 ),
               ),
               separatorBuilder: (context, index) => SizedBox.fromSize(
