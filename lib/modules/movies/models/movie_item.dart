@@ -16,7 +16,8 @@ class MovieItem {
         id: json['id'],
         title: json['title'],
         genres: List.castFrom<dynamic, int>(json['genre_ids']).toList(),
-        posterPath: json['poster_path'] ??
-            'https://image.tmdb.org/t/p/w500/${json['poster_path']}',
+        posterPath: json['poster_path'] != null
+            ? 'https://image.tmdb.org/t/p/w500/${json['poster_path']}'
+            : null,
       );
 }
