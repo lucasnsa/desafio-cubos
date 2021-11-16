@@ -101,23 +101,25 @@ class _MoviesHomePageState extends State<MoviesHomePage>
                               ),
                             ),
                           ),
-                          Observer(builder: (context) {
-                            return TabChips(
-                              labels: const [
-                                'Ação',
-                                'Aventura',
-                                'Fantasia',
-                                'Comédia',
-                              ],
-                              selectedIndex: controller.tabIndex,
-                              onChanged: (value) {
-                                controller.tabIndex = value;
-                                final genre = tabToGenreId(value);
-                                controller.changeGenre(genre);
-                                _searchTextController.clear();
-                              },
-                            );
-                          })
+                          Observer(
+                            builder: (context) {
+                              return TabChips(
+                                labels: const [
+                                  'Ação',
+                                  'Aventura',
+                                  'Fantasia',
+                                  'Comédia',
+                                ],
+                                selectedIndex: controller.tabIndex,
+                                onChanged: (value) {
+                                  controller.tabIndex = value;
+                                  final genre = tabToGenreId(value);
+                                  controller.changeGenre(genre);
+                                  _searchTextController.clear();
+                                },
+                              );
+                            },
+                          )
                         ],
                       ),
                     ),
@@ -147,6 +149,7 @@ class _MoviesHomePageState extends State<MoviesHomePage>
   }
 }
 
+/// Header permanente usando Sliver
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final PreferredSize child;
 

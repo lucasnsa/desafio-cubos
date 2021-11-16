@@ -266,8 +266,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                     'ORÇAMENTO: ',
                                     style: movieDetailChipLabelStyle,
                                   ),
-                                  Text('\$ ${_movieDetail?.budget}',
-                                      style: movieDetailChipValueStyle),
+                                  Text(
+                                    '\$ ${_movieDetail?.budget}',
+                                    style: movieDetailChipValueStyle,
+                                  ),
                                 ],
                               ),
                             ),
@@ -295,11 +297,12 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                     'PRODUTORAS: ',
                                     style: movieDetailChipLabelStyle,
                                   ),
-                                  ..._movieDetail!.companies
-                                      .map<Widget>((e) => Text(
-                                            e,
-                                            style: movieDetailChipValueStyle,
-                                          )),
+                                  ..._movieDetail!.companies.map<Widget>(
+                                    (e) => Text(
+                                      e,
+                                      style: movieDetailChipValueStyle,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
