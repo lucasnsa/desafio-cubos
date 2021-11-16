@@ -32,6 +32,9 @@ abstract class _MoviesHomeControllerBase with Store {
   @observable
   String searchTerm = '';
 
+  @observable
+  int tabIndex = 0;
+
   @action
   void initPagingController() {
     _pagingController.addPageRequestListener((page) {
@@ -41,7 +44,6 @@ abstract class _MoviesHomeControllerBase with Store {
 
   @action
   Future<void> _fetchPage(int fetchPage, int genre, String searchTerm) async {
-    debugPrint('chjamou');
     try {
       final newItems = searchTerm.isEmpty
           ? await _repository.listMoviesbyGenre(genre, page: fetchPage)

@@ -39,6 +39,21 @@ mixin _$MoviesHomeController on _MoviesHomeControllerBase, Store {
     });
   }
 
+  final _$tabIndexAtom = Atom(name: '_MoviesHomeControllerBase.tabIndex');
+
+  @override
+  int get tabIndex {
+    _$tabIndexAtom.reportRead();
+    return super.tabIndex;
+  }
+
+  @override
+  set tabIndex(int value) {
+    _$tabIndexAtom.reportWrite(value, super.tabIndex, () {
+      super.tabIndex = value;
+    });
+  }
+
   final _$_fetchPageAsyncAction =
       AsyncAction('_MoviesHomeControllerBase._fetchPage');
 
@@ -46,6 +61,15 @@ mixin _$MoviesHomeController on _MoviesHomeControllerBase, Store {
   Future<void> _fetchPage(int fetchPage, int genre, String searchTerm) {
     return _$_fetchPageAsyncAction
         .run(() => super._fetchPage(fetchPage, genre, searchTerm));
+  }
+
+  final _$changeSearchTermAsyncAction =
+      AsyncAction('_MoviesHomeControllerBase.changeSearchTerm');
+
+  @override
+  Future<void> changeSearchTerm(String term) {
+    return _$changeSearchTermAsyncAction
+        .run(() => super.changeSearchTerm(term));
   }
 
   final _$_MoviesHomeControllerBaseActionController =
@@ -77,7 +101,8 @@ mixin _$MoviesHomeController on _MoviesHomeControllerBase, Store {
   String toString() {
     return '''
 actualGenre: ${actualGenre},
-searchTerm: ${searchTerm}
+searchTerm: ${searchTerm},
+tabIndex: ${tabIndex}
     ''';
   }
 }
