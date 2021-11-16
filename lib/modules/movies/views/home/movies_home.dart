@@ -31,6 +31,7 @@ class _MoviesHomePageState extends State<MoviesHomePage>
       _performTabSelection();
       final genre = tabToGenreId(_currentIndex);
       controller.changeGenre(genre);
+      _searchTextController.clear();
     });
     _searchTextController.addListener(() {
       controller.performSearch(_searchTextController.text);
