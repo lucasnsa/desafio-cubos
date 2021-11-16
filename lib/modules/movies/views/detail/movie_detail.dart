@@ -4,6 +4,7 @@ import 'package:desafiocubos/modules/movies/models/movie_item.dart';
 import 'package:desafiocubos/modules/movies/views/detail/movie_detail_controller.dart';
 import 'package:desafiocubos/resources/text_styles.dart';
 import 'package:desafiocubos/utils/dutarion_convert.dart';
+import 'package:desafiocubos/utils/string_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -262,7 +263,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                     style: movieDetailChipLabelStyle,
                                   ),
                                   Text(
-                                    '\$ ${_movieDetail?.budget}',
+                                    '\$ ${formatToMoney(_movieDetail?.budget ?? 0)}',
                                     style: movieDetailChipValueStyle,
                                   ),
                                 ],
