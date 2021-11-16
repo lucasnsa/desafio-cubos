@@ -47,7 +47,7 @@ class TheMovieDB {
   /// Busca no **cache ou no servidor** por detalhes de um titulo especifico
   Future<Response> getMovieDetail(int movieId) {
     final getMovieDetail =
-        'https://api.themoviedb.org/3/movie/$movieId?language=pt-BR';
+        'https://api.themoviedb.org/3/movie/$movieId?language=pt-BR&append_to_response=credits';
     return _get(getMovieDetail);
   }
 
