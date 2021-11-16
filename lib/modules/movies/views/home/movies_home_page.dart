@@ -93,7 +93,6 @@ class _MoviesHomePageState extends State<MoviesHomePage>
                                   padding: const EdgeInsets.all(10.0),
                                   child: Image.asset(
                                     'assets/icons/search.png',
-                                    // fit: BoxFit.fill,
                                   ),
                                 ),
                                 hintText: 'Pesquise filmes',
