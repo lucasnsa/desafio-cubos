@@ -1,5 +1,6 @@
 import 'package:desafiocubos/modules/movies/models/movie_item.dart';
 import 'package:desafiocubos/modules/movies/repository/tmdb_repository.dart';
+import 'package:desafiocubos/utils/debouncer.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:mobx/mobx.dart';
@@ -12,6 +13,8 @@ class MoviesHomeController = _MoviesHomeControllerBase
 abstract class _MoviesHomeControllerBase with Store {
   final TmdbRepository _repository;
 
+  final searchDebouncer = Debouncer(const Duration(milliseconds: 500));
+
   final PagingController<int, MovieItem> _pagingController =
       PagingController(firstPageKey: 1);
 
@@ -23,22 +26,28 @@ abstract class _MoviesHomeControllerBase with Store {
     initPagingController();
   }
 
-  // @observable
+  @observable
   int actualGenre = 28;
+
+  @observable
+  String searchTerm = '';
+
+  @observable
+  int tabIndex = 0;
 
   @action
   void initPagingController() {
     _pagingController.addPageRequestListener((page) {
-      _fetchPage(page, actualGenre);
+      _fetchPage(page, actualGenre, searchTerm);
     });
   }
 
   @action
-  Future<void> _fetchPage(int fetchPage, int genre) async {
-    debugPrint('chjamou');
+  Future<void> _fetchPage(int fetchPage, int genre, String searchTerm) async {
     try {
-      final newItems =
-          await _repository.listMoviesbyGenre(genre, page: fetchPage);
+      final newItems = searchTerm.isEmpty
+          ? await _repository.listMoviesbyGenre(genre, page: fetchPage)
+          : await _repository.searchMovies(searchTerm, page: fetchPage);
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
         _pagingController.appendLastPage(newItems);
@@ -54,9 +63,21 @@ abstract class _MoviesHomeControllerBase with Store {
 
   @action
   void changeGenre(int genre) {
-    _pagingController.removeListener(() {});
-    actualGenre = genre;
-    _pagingController.itemList?.clear();
-    _pagingController.refresh();
+    if (actualGenre != genre) {
+      actualGenre = genre;
+      _pagingController.refresh();
+    }
+  }
+
+  @action
+  Future<void> changeSearchTerm(String term) async {
+    if (searchTerm != term) {
+      searchTerm = term;
+      _pagingController.refresh();
+    }
+  }
+
+  void performSearch(String term) {
+    searchDebouncer(() => changeSearchTerm(term));
   }
 }

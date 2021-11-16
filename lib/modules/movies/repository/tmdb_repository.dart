@@ -35,7 +35,7 @@ class TmdbRepository implements Repository {
   /// Busca no **DataSource** conforme a [query]
   /// Valor padrão de [pagina] é **1**
   @override
-  Future<List> searchMovies(String query, {int page = 1}) async {
+  Future<List<MovieItem>> searchMovies(String query, {int page = 1}) async {
     final response = await _dataSource.searchMovies(query, page: page);
 
     final Map<String, dynamic> json = jsonDecode(response.body);

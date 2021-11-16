@@ -5,6 +5,7 @@ import 'package:desafiocubos/modules/movies/views/home/widgets/tabbar_chip.dart'
 import 'package:desafiocubos/resources/text_styles.dart';
 import 'package:desafiocubos/utils/genre_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -17,19 +18,14 @@ class MoviesHomePage extends StatefulWidget {
 
 class _MoviesHomePageState extends State<MoviesHomePage>
     with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
   final controller = Modular.get<MoviesHomeController>();
-
-  final int _currentIndex = 0;
+  final TextEditingController _searchTextController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: 4);
-    _tabController.addListener(() {
-      _performTabSelection();
-      final genre = tabToGenreId(_currentIndex);
-      controller.changeGenre(genre);
+    _searchTextController.addListener(() {
+      controller.performSearch(_searchTextController.text);
     });
   }
 
@@ -80,6 +76,7 @@ class _MoviesHomePageState extends State<MoviesHomePage>
                           SizedBox(
                             height: 47,
                             child: TextField(
+                              controller: _searchTextController,
                               decoration: InputDecoration(
                                 fillColor: const Color(0xFFF1F3F5),
                                 filled: true,
@@ -104,10 +101,23 @@ class _MoviesHomePageState extends State<MoviesHomePage>
                               ),
                             ),
                           ),
-                          TabBarChip(
-                            controller: _tabController,
-                          ),
-                          // TabChips()
+                          Observer(builder: (context) {
+                            return TabChips(
+                              labels: const [
+                                'Ação',
+                                'Aventura',
+                                'Fantasia',
+                                'Comédia',
+                              ],
+                              selectedIndex: controller.tabIndex,
+                              onChanged: (value) {
+                                controller.tabIndex = value;
+                                final genre = tabToGenreId(value);
+                                controller.changeGenre(genre);
+                                _searchTextController.clear();
+                              },
+                            );
+                          })
                         ],
                       ),
                     ),
@@ -134,14 +144,6 @@ class _MoviesHomePageState extends State<MoviesHomePage>
         ],
       ),
     );
-  }
-
-  void _performTabSelection() {
-    // if (_tabController.indexIsChanging) {
-    //   setState(() {
-    //     _currentIndex = _tabController.index;
-    //   });
-    // }
   }
 }
 
