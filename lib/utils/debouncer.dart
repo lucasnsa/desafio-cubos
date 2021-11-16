@@ -1,5 +1,6 @@
 import 'dart:async';
 
+/// Executa um **Future** em debounce.
 class Debouncer {
   Duration delay;
   Timer? _timer;

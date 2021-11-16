@@ -1,7 +1,7 @@
 import 'package:desafiocubos/modules/movies/repository/tmdb_repository.dart';
-import 'package:desafiocubos/modules/movies/views/detail/movie_detail.dart';
+import 'package:desafiocubos/modules/movies/views/detail/movie_detail_page.dart';
 import 'package:desafiocubos/modules/movies/views/detail/movie_detail_controller.dart';
-import 'package:desafiocubos/modules/movies/views/home/movies_home.dart';
+import 'package:desafiocubos/modules/movies/views/home/movies_home_page.dart';
 import 'package:desafiocubos/modules/movies/views/home/movies_home_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

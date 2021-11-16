@@ -57,12 +57,12 @@ class TabChips extends StatelessWidget {
   final int selectedIndex;
   final List<String> labels;
 
-  const TabChips(
-      {Key? key,
-      required this.onChanged,
-      this.selectedIndex = 0,
-      required this.labels})
-      : super(key: key);
+  const TabChips({
+    Key? key,
+    required this.onChanged,
+    this.selectedIndex = 0,
+    required this.labels,
+  }) : super(key: key);
 
   // bypass para o toque
   void _handleTap(int value) {

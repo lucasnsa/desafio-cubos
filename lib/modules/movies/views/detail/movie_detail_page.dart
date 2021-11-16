@@ -4,6 +4,7 @@ import 'package:desafiocubos/modules/movies/models/movie_item.dart';
 import 'package:desafiocubos/modules/movies/views/detail/movie_detail_controller.dart';
 import 'package:desafiocubos/resources/text_styles.dart';
 import 'package:desafiocubos/utils/dutarion_convert.dart';
+import 'package:desafiocubos/utils/string_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -30,7 +31,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    // _movieDetail = await controller.getDetail(widget.movieItem.id);
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -95,10 +95,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                             ),
                             fit: BoxFit.cover,
                           ),
-                          // child: Image.network(
-                          //   widget.movieItem.posterPath!,
-                          //   fit: BoxFit.cover,
-                          // ),
                         ),
                       ),
                     ),
@@ -266,8 +262,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                     'ORÇAMENTO: ',
                                     style: movieDetailChipLabelStyle,
                                   ),
-                                  Text('\$ ${_movieDetail?.budget}',
-                                      style: movieDetailChipValueStyle),
+                                  Text(
+                                    '\$ ${formatToMoney(_movieDetail?.budget ?? 0)}',
+                                    style: movieDetailChipValueStyle,
+                                  ),
                                 ],
                               ),
                             ),
@@ -295,11 +293,12 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                     'PRODUTORAS: ',
                                     style: movieDetailChipLabelStyle,
                                   ),
-                                  ..._movieDetail!.companies
-                                      .map<Widget>((e) => Text(
-                                            e,
-                                            style: movieDetailChipValueStyle,
-                                          )),
+                                  ..._movieDetail!.companies.map<Widget>(
+                                    (e) => Text(
+                                      e,
+                                      style: movieDetailChipValueStyle,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
