@@ -5,7 +5,6 @@ import 'package:desafiocubos/interfaces/repository.dart';
 import 'package:desafiocubos/modules/movies/models/movie_detail.dart';
 import 'package:desafiocubos/modules/movies/models/movie_item.dart';
 
-
 /// Classe Repositorio que consome o DataSource [TheMovieDB]
 class TmdbRepository implements Repository {
   final TheMovieDB _dataSource;
@@ -15,7 +14,7 @@ class TmdbRepository implements Repository {
   /// Busca **detalhes** do titulo selecionado
   @override
   Future<MovieDetail> getMovieDetail(int movieId) async {
-    final response = await _dataSource.getMoviesByGenre(movieId);
+    final response = await _dataSource.getMovieDetail(movieId);
     final Map<String, dynamic> json = jsonDecode(response.body);
 
     return MovieDetail.fromJson(json);

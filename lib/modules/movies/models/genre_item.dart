@@ -6,5 +6,5 @@ class GenreItem {
   GenreItem({required this.id, required this.name});
 
   factory GenreItem.fromJson(Map<String, dynamic> json) =>
-      GenreItem(id: json['id'], name: json['genre']);
+      GenreItem(id: json['id'], name: json['name']);
 }
