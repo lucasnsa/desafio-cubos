@@ -2,6 +2,7 @@ import 'package:desafiocubos/modules/movies/models/movie_item.dart';
 import 'package:desafiocubos/modules/movies/views/home/movies_home_controller.dart';
 import 'package:desafiocubos/modules/movies/views/home/widgets/movie_tile.dart';
 import 'package:desafiocubos/modules/movies/views/home/widgets/tabbar_chip.dart';
+import 'package:desafiocubos/resources/text_styles.dart';
 import 'package:desafiocubos/utils/genre_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -38,11 +39,14 @@ class _MoviesHomePageState extends State<MoviesHomePage>
       body: CustomScrollView(
         slivers: <Widget>[
           const SliverAppBar(
+            titleTextStyle: appBarTitleStyle,
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
             primary: true,
             pinned: true,
-            title: Text('Filmes'),
+            title: Text(
+              'Filmes',
+            ),
             elevation: 0,
           ),
           SliverPersistentHeader(
@@ -73,21 +77,31 @@ class _MoviesHomePageState extends State<MoviesHomePage>
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const TextField(
-                            decoration: InputDecoration(
-                              fillColor: Color(0xFFF1F3F5),
-                              filled: true,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(100),
+                          SizedBox(
+                            height: 47,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                fillColor: const Color(0xFFF1F3F5),
+                                filled: true,
+                                border: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(100),
+                                  ),
+                                  borderSide: BorderSide(
+                                    width: 0,
+                                    style: BorderStyle.none,
+                                  ),
                                 ),
-                                borderSide: BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Image.asset(
+                                    'assets/icons/search.png',
+                                    // fit: BoxFit.fill,
+                                  ),
                                 ),
+                                hintText: 'Pesquise filmes',
+                                hintStyle: searchTermStyle,
                               ),
-                              prefixIcon: Icon(Icons.search),
-                              hintText: 'Pesquise filmes',
                             ),
                           ),
                           TabBarChip(

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:desafiocubos/modules/movies/models/movie_detail.dart';
 import 'package:desafiocubos/modules/movies/models/movie_item.dart';
 import 'package:desafiocubos/modules/movies/views/detail/movie_detail_controller.dart';
+import 'package:desafiocubos/resources/text_styles.dart';
 import 'package:desafiocubos/utils/dutarion_convert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -119,9 +120,12 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(_movieDetail?.voteAverage.toString() ??
-                                'Sem nota'),
-                            const Text('/10'),
+                            Text(
+                              _movieDetail?.voteAverage.toString() ??
+                                  'Sem nota',
+                              style: movieDetailRatingStyle,
+                            ),
+                            const Text('/10', style: movieDetailRatingMaxStyle),
                           ],
                         );
                       }
@@ -130,7 +134,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                   SizedBox.fromSize(
                     size: const Size.fromHeight(32),
                   ),
-                  Text(widget.movieItem.title.toUpperCase()),
+                  Text(
+                    widget.movieItem.title.toUpperCase(),
+                    style: movieDetailTitleStyle,
+                  ),
                   SizedBox.fromSize(
                     size: const Size.fromHeight(12),
                   ),
@@ -144,10 +151,14 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Text('Titulo original: '),
+                                const Text(
+                                  'Titulo original: ',
+                                  style: movieDetailTitleRealStyle,
+                                ),
                                 Text(
                                   _movieDetail?.origialTitle ??
                                       widget.movieItem.title,
+                                  style: movieDetailTitleRealStyle,
                                 ),
                               ],
                             ),
@@ -159,21 +170,29 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                               children: [
                                 Row(
                                   children: [
-                                    const Text('Ano: '),
+                                    const Text(
+                                      'Ano: ',
+                                      style: movieDetailChipLabelStyle,
+                                    ),
                                     Text(
                                       _movieDetail?.releaseDate.year
                                               .toString() ??
                                           'Sem data',
+                                      style: movieDetailChipValueStyle,
                                     ),
                                   ],
                                 ),
                                 Row(
                                   children: [
-                                    const Text('Duração: '),
+                                    const Text(
+                                      'Duração: ',
+                                      style: movieDetailChipLabelStyle,
+                                    ),
                                     Text(
                                       formatDuration(
                                         _movieDetail?.runtime ?? 0,
                                       ),
+                                      style: movieDetailChipValueStyle,
                                     ),
                                   ],
                                 )
@@ -198,7 +217,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                             Radius.circular(5),
                                           ),
                                         ),
-                                        child: Text(e.name.toUpperCase()),
+                                        child: Text(
+                                          e.name.toUpperCase(),
+                                          style: movieDetailGenreChipStyle,
+                                        ),
                                       ),
                                     )
                                     .toList(),
@@ -210,12 +232,16 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Descrição'),
+                                const Text(
+                                  'Descrição',
+                                  style: movieDetailSectionTitleStyle,
+                                ),
                                 SizedBox.fromSize(
                                   size: const Size.fromHeight(8),
                                 ),
                                 Text(
                                   _movieDetail?.overview ?? 'Sem descrição',
+                                  style: movieDetailSectionBodyStyle,
                                 ),
                               ],
                             ),
@@ -236,8 +262,12 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                               ),
                               child: Row(
                                 children: [
-                                  Text('ORÇAMENTO: '),
-                                  Text('\$ ${_movieDetail?.budget}'),
+                                  const Text(
+                                    'ORÇAMENTO: ',
+                                    style: movieDetailChipLabelStyle,
+                                  ),
+                                  Text('\$ ${_movieDetail?.budget}',
+                                      style: movieDetailChipValueStyle),
                                 ],
                               ),
                             ),
@@ -261,9 +291,15 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                               child: Wrap(
                                 spacing: 8,
                                 children: [
-                                  const Text('PRODUTORAS: '),
+                                  const Text(
+                                    'PRODUTORAS: ',
+                                    style: movieDetailChipLabelStyle,
+                                  ),
                                   ..._movieDetail!.companies
-                                      .map<Widget>((e) => Text(e)),
+                                      .map<Widget>((e) => Text(
+                                            e,
+                                            style: movieDetailChipValueStyle,
+                                          )),
                                 ],
                               ),
                             ),
@@ -273,12 +309,16 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Diretor'),
+                                const Text(
+                                  'Diretor',
+                                  style: movieDetailSectionTitleStyle,
+                                ),
                                 SizedBox.fromSize(
                                   size: const Size.fromHeight(8),
                                 ),
                                 Text(
                                   _movieDetail?.crew.join(', ') ?? '',
+                                  style: movieDetailSectionBodyStyle,
                                 ),
                               ],
                             ),
@@ -288,12 +328,16 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Elenco'),
+                                const Text(
+                                  'Elenco',
+                                  style: movieDetailSectionTitleStyle,
+                                ),
                                 SizedBox.fromSize(
                                   size: const Size.fromHeight(8),
                                 ),
                                 Text(
                                   _movieDetail?.cast.join(', ') ?? '',
+                                  style: movieDetailSectionBodyStyle,
                                 ),
                               ],
                             ),
