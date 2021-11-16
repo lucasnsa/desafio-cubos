@@ -9,13 +9,43 @@ part of 'movies_home_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$MoviesHomeController on _MoviesHomeControllerBase, Store {
+  final _$actualGenreAtom = Atom(name: '_MoviesHomeControllerBase.actualGenre');
+
+  @override
+  int get actualGenre {
+    _$actualGenreAtom.reportRead();
+    return super.actualGenre;
+  }
+
+  @override
+  set actualGenre(int value) {
+    _$actualGenreAtom.reportWrite(value, super.actualGenre, () {
+      super.actualGenre = value;
+    });
+  }
+
+  final _$searchTermAtom = Atom(name: '_MoviesHomeControllerBase.searchTerm');
+
+  @override
+  String get searchTerm {
+    _$searchTermAtom.reportRead();
+    return super.searchTerm;
+  }
+
+  @override
+  set searchTerm(String value) {
+    _$searchTermAtom.reportWrite(value, super.searchTerm, () {
+      super.searchTerm = value;
+    });
+  }
+
   final _$_fetchPageAsyncAction =
       AsyncAction('_MoviesHomeControllerBase._fetchPage');
 
   @override
-  Future<void> _fetchPage(int fetchPage, int genre) {
+  Future<void> _fetchPage(int fetchPage, int genre, String searchTerm) {
     return _$_fetchPageAsyncAction
-        .run(() => super._fetchPage(fetchPage, genre));
+        .run(() => super._fetchPage(fetchPage, genre, searchTerm));
   }
 
   final _$_MoviesHomeControllerBaseActionController =
@@ -46,7 +76,8 @@ mixin _$MoviesHomeController on _MoviesHomeControllerBase, Store {
   @override
   String toString() {
     return '''
-
+actualGenre: ${actualGenre},
+searchTerm: ${searchTerm}
     ''';
   }
 }

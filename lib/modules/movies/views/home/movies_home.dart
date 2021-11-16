@@ -19,8 +19,9 @@ class _MoviesHomePageState extends State<MoviesHomePage>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
   final controller = Modular.get<MoviesHomeController>();
+  final TextEditingController _searchTextController = TextEditingController();
 
-  final int _currentIndex = 0;
+  int _currentIndex = 0;
 
   @override
   void initState() {
@@ -30,6 +31,9 @@ class _MoviesHomePageState extends State<MoviesHomePage>
       _performTabSelection();
       final genre = tabToGenreId(_currentIndex);
       controller.changeGenre(genre);
+    });
+    _searchTextController.addListener(() {
+      controller.performSearch(_searchTextController.text);
     });
   }
 
@@ -80,6 +84,7 @@ class _MoviesHomePageState extends State<MoviesHomePage>
                           SizedBox(
                             height: 47,
                             child: TextField(
+                              controller: _searchTextController,
                               decoration: InputDecoration(
                                 fillColor: const Color(0xFFF1F3F5),
                                 filled: true,
@@ -137,11 +142,11 @@ class _MoviesHomePageState extends State<MoviesHomePage>
   }
 
   void _performTabSelection() {
-    // if (_tabController.indexIsChanging) {
-    //   setState(() {
-    //     _currentIndex = _tabController.index;
-    //   });
-    // }
+    if (_tabController.indexIsChanging) {
+      setState(() {
+        _currentIndex = _tabController.index;
+      });
+    }
   }
 }
 

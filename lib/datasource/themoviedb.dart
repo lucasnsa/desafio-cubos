@@ -54,7 +54,7 @@ class TheMovieDB {
   /// Procura no **cache ou no servidor** titulos respeitando uma [query]
   Future<Response> searchMovies(String query, {int page = 1}) {
     final searchMovies =
-        'https://api.themoviedb.org/3/search/movie?language=pt-BR&page=$page&include_adult=false';
+        'https://api.themoviedb.org/3/search/movie?language=pt-BR&page=$page&query=$query&include_adult=false';
     return _get(searchMovies);
   }
 }
