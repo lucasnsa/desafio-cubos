@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:desafiocubos/modules/movies/models/movie_item.dart';
+import 'package:desafiocubos/resources/text_styles.dart';
 import 'package:desafiocubos/utils/genre_list.dart';
 import 'package:flutter/material.dart';
 
@@ -55,20 +56,14 @@ class MovieTile extends StatelessWidget {
                   children: [
                     Text(
                       movie.title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .subtitle2
-                          ?.copyWith(color: Colors.white),
+                      style: movieItemTitleStyle,
                     ),
                     SizedBox.fromSize(
                       size: const Size.fromHeight(12),
                     ),
                     Text(
                       movie.genres.map((e) => getGenreNameById(e)).join(' - '),
-                      style: Theme.of(context)
-                          .textTheme
-                          .caption
-                          ?.copyWith(color: Colors.white),
+                      style: movieItemGenresStyle,
                     ),
                   ],
                 ),

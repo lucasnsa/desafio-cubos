@@ -1,4 +1,5 @@
 import 'package:desafiocubos/modules/movies/views/home/widgets/tab_indicator.dart';
+import 'package:desafiocubos/resources/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class TabBarChip extends StatelessWidget {
@@ -10,7 +11,7 @@ class TabBarChip extends StatelessWidget {
     return TabBar(
       controller: controller,
       unselectedLabelColor: Colors.black,
-      labelStyle: Theme.of(context).textTheme.caption?.copyWith(fontSize: 12.0),
+      labelStyle: tabTitleStyle,
       indicatorSize: TabBarIndicatorSize.label,
       indicator: const TabIndicator(
         backgroundColor: Color(0xFF00384C),
