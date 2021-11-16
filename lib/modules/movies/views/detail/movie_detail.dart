@@ -30,7 +30,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    // _movieDetail = await controller.getDetail(widget.movieItem.id);
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -95,10 +94,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                             ),
                             fit: BoxFit.cover,
                           ),
-                          // child: Image.network(
-                          //   widget.movieItem.posterPath!,
-                          //   fit: BoxFit.cover,
-                          // ),
                         ),
                       ),
                     ),
